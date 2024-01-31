@@ -1,0 +1,7 @@
+[main]
+host = https://www.transifex.com
+
+[o:horus:p:horus:r:qt-translation-025x]
+file_filter = src/qt/locale/horus_<lang>.xlf
+source_file = src/qt/locale/horus_en.xlf
+source_lang = en

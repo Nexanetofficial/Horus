@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+#
+#  horusd The horus core server.
+#
+#
+# chkconfig: 345 80 20
+# description: horusd
+# processname: horusd
+#
+
+# Source function library.
+. /etc/init.d/functions
+
+# you can override defaults in /etc/sysconfig/horusd, see below
+if [ -f /etc/sysconfig/horusd ]; then
+        . /etc/sysconfig/horusd
+fi
+
+RETVAL=0
+
+prog=horusd
+# you can override the lockfile via HORUSD_LOCKFILE in /etc/sysconfig/horusd
+lockfile=${HORUSD_LOCKFILE-/var/lock/subsys/horusd}
+
+# horusd defaults to /usr/bin/horusd, override with HORUSD_BIN
+horusd=${HORUSD_BIN-/usr/bin/horusd}
+
+# horusd opts default to -disablewallet, override with HORUSD_OPTS
+horusd_opts=${HORUSD_OPTS--disablewallet}
+
+start() {
+    echo -n $"Starting $prog: "
+    daemon $DAEMONOPTS $horusd $horusd_opts
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && touch $lockfile
+    return $RETVAL
+}
+
+stop() {
+    echo -n $"Stopping $prog: "
+    killproc $prog -t600
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && rm -f $lockfile
+    return $RETVAL
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        status $prog
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    *)
+        echo "Usage: service $prog {start|stop|status|restart}"
+        exit 1
+        ;;
+esac

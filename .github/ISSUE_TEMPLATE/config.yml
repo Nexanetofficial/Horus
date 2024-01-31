@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Horus Core Security Policy
+    url: https://github.com/horus/horus/blob/master/SECURITY.md
+    about: View security policy
+  - name: Horus Core Developers
+    url: https://bitcoincore.org
+    about: Horus Core homepage
