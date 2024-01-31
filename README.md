@@ -1,10 +1,6 @@
 Horus Core integration/staging tree
 =====================================
 
-https://bitcoincore.org
-
-For an immediately usable, binary version of the Horus Core software, see
-https://bitcoincore.org/en/download/.
 
 What is Horus Core?
 ---------------------
